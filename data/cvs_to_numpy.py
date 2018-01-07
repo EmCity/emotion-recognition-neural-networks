@@ -105,6 +105,11 @@ for index, row in data.iterrows():
     index += 1
     print "Progreso: {}/{} {:.2f}%".format(index, total, index * 100.0 / total)
 '''
+
+train_images = (train_images - np.min(train_images)) / (np.max(train_images) - np.min(train_images))
+test_images = (test_images - np.min(test_images)) / (np.max(test_images) - np.min(test_images))
+valid_images = (valid_images- np.min(valid_images)) / (np.max(valid_images) - np.min(valid_images))
+#test_img = (test_img - np.min(test_img)) / (np.max(test_img) - np.min(test_img))
 #sanity check
 print "Total amount of train images: " + str(len(train_images))
 print "Total amount of test images: " + str(len(test_images))
