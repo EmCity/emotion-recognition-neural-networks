@@ -62,14 +62,40 @@ def data_to_image(data):
 FILE_PATH = 'fer2013.csv'
 data = pd.read_csv(FILE_PATH)
 
-labels = []
-images = []
+train_labels = []
+train_images = []
+test_labels = []
+test_images = [] 
+valid_labels = []
+valid_images = [] 
 index = 1
 total = data.shape[0]
 for index, row in data.iterrows():
     emotion = emotion_to_vec(row['emotion'])
     image = data_to_image(row['pixels'])
     if image is not None:
+        if row['Usage'] == 'Training':
+          train_labels.append(emotion)
+          train_images.append(image)
+          #data augmentation could be done here theoretically
+          #labels.append(emotion)
+          #images.append(flip_image(image))
+        elif row['Usage'] == 'PrivateTest':
+          test_labels.append(emotion)
+          test_images.append(image)
+        elif row['Usage'] == 'PublicTest':
+          valid_labels.append(emotion)
+          valid_images.append(image)
+    else:
+        print "Error"
+    index += 1
+    print "Progreso: {}/{} {:.2f}%".format(index, total, index * 100.0 / total)
+'''
+for index, row in data.iterrows():
+    emotion = emotion_to_vec(row['emotion'])
+    image = data_to_image(row['pixels'])
+    if image is not None:
+
         labels.append(emotion)
         images.append(image)
         #labels.append(emotion)
@@ -78,7 +104,23 @@ for index, row in data.iterrows():
         print "Error"
     index += 1
     print "Progreso: {}/{} {:.2f}%".format(index, total, index * 100.0 / total)
-
-print "Total: " + str(len(images))
-np.save('data_kike.npy', images)
-np.save('labels_kike.npy', labels)
+'''
+#sanity check
+print "Total amount of train images: " + str(len(train_images))
+print "Total amount of test images: " + str(len(test_images))
+print "Total amount of train labels: " + str(len(test_images))
+print "Total amount of test labels: " + str(len(test_labels))
+#np.save('data_kike.npy', images)
+#np.save('labels_kike.npy', labels)
+np.save('fer_train_data_output.npy', train_images)
+np.save('fer_test_data_output.npy', test_images)
+np.save('fer_valid_data_output.npy', valid_images)
+np.save('fer_train_labels_output.npy', train_labels)
+np.save('fer_test_labels_output.npy', train_labels)
+np.save('fer_valid_labels_output.npy', valid_labels)
+'''
+np.save('fer_train_data_output.npy', train_images)
+np.save('fer_test_data_output.npy', test_images)
+np.save('fer_train_labels_output.npy', train_labels)
+np.save('fer_test_labels_output.npy', train_labels)
+'''
