@@ -113,7 +113,7 @@ valid_images = (valid_images- np.min(valid_images)) / (np.max(valid_images) - np
 #sanity check
 print "Total amount of train images: " + str(len(train_images))
 print "Total amount of test images: " + str(len(test_images))
-print "Total amount of train labels: " + str(len(test_images))
+print "Total amount of train labels: " + str(len(train_labels))
 print "Total amount of test labels: " + str(len(test_labels))
 #np.save('data_kike.npy', images)
 #np.save('labels_kike.npy', labels)
@@ -121,7 +121,7 @@ np.save('fer_train_data_output.npy', train_images)
 np.save('fer_test_data_output.npy', test_images)
 np.save('fer_valid_data_output.npy', valid_images)
 np.save('fer_train_labels_output.npy', train_labels)
-np.save('fer_test_labels_output.npy', train_labels)
+np.save('fer_test_labels_output.npy', test_labels)
 np.save('fer_valid_labels_output.npy', valid_labels)
 '''
 np.save('fer_train_data_output.npy', train_images)
